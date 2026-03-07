@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Food and Beverage Intelligence · Q1 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=IBM+Plex+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#0d0d0d;--paper:#f5f0e8;--accent:#c8402a;--muted:#6b6455;--rule:#d4cdc0;--highlight:#f0e6d0;}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--paper);color:var(--ink);font-family:'DM Sans',sans-serif;font-weight:300;line-height:1.7;}
+  .masthead{border-bottom:3px solid var(--ink);padding:2rem 4rem 1.5rem;display:flex;align-items:flex-end;justify-content:space-between;}
+  .masthead-left .label{font-family:'IBM Plex Mono',monospace;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:0.4rem;}
+  .masthead-left .publication{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;}
+  .masthead-right{text-align:right;font-family:'IBM Plex Mono',monospace;font-size:0.65rem;color:var(--muted);letter-spacing:0.08em;line-height:1.9;}
+  .hero{padding:3rem 4rem 2.5rem;border-bottom:1px solid var(--rule);display:grid;grid-template-columns:1fr 280px;gap:4rem;align-items:start;}
+  .hero-title{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,5vw,3.8rem);font-weight:900;line-height:1.1;letter-spacing:-0.02em;}
+  .hero-meta{margin-top:1.5rem;display:flex;gap:2rem;align-items:center;}
+  .hero-meta .tag{font-family:'IBM Plex Mono',monospace;font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;background:var(--ink);color:var(--paper);padding:0.3rem 0.8rem;}
+  .hero-meta .date{font-family:'IBM Plex Mono',monospace;font-size:0.65rem;color:var(--muted);letter-spacing:0.08em;}
+  .anxiety-card{border:1px solid var(--rule);padding:1.4rem;background:var(--highlight);}
+  .anxiety-card .card-label{font-family:'IBM Plex Mono',monospace;font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);margin-bottom:0.7rem;}
+  .anxiety-card p{font-size:0.88rem;line-height:1.6;font-style:italic;}
+  .audience-tag{margin-top:1rem;font-family:'IBM Plex Mono',monospace;font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);}
+  .report-body{padding:0 4rem;display:grid;grid-template-columns:1fr 280px;gap:4rem;}
+  .main-col{padding:3rem 0;}
+  .side-col{padding:3rem 0;border-left:1px solid var(--rule);padding-left:2rem;}
+  .section{margin-bottom:3rem;}
+  .section-header{display:flex;align-items:baseline;gap:1rem;margin-bottom:1.2rem;padding-bottom:0.8rem;border-bottom:1px solid var(--rule);}
+  .section-num{font-family:'IBM Plex Mono',monospace;font-size:0.6rem;color:var(--accent);letter-spacing:0.1em;}
+  .section-title{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;}
+  .section-content{font-size:0.92rem;line-height:1.8;color:#1a1a1a;}
+  .section-content p{margin-bottom:1rem;}
+  .inevitable-block{background:var(--ink);color:var(--paper);padding:2rem 2.5rem;margin:2rem 0;}
+  .inevitable-block .label{font-family:'IBM Plex Mono',monospace;font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;}
+  .inevitable-block p{font-family:'Playfair Display',serif;font-size:1.05rem;font-style:italic;line-height:1.7;}
+  .friction-item{padding:1rem 0;border-bottom:1px dashed var(--rule);}
+  .friction-item:last-child{border-bottom:none;}
+  .friction-item h4{font-size:0.82rem;font-weight:500;margin-bottom:0.4rem;display:flex;align-items:center;gap:0.5rem;}
+  .friction-item h4::before{content:'//';font-family:'IBM Plex Mono',monospace;font-size:0.65rem;color:var(--accent);}
+  .friction-item p{font-size:0.8rem;color:var(--muted);line-height:1.6;}
+  .watchlist-item{padding:1rem 0;border-bottom:1px dashed var(--rule);display:grid;grid-template-columns:28px 1fr;gap:0.8rem;}
+  .watchlist-item:last-child{border-bottom:none;}
+  .watchlist-num{font-family:'IBM Plex Mono',monospace;font-size:0.7rem;color:var(--accent);font-weight:500;}
+  .watchlist-item h4{font-size:0.82rem;font-weight:500;margin-bottom:0.3rem;}
+  .watchlist-item p{font-size:0.78rem;color:var(--muted);line-height:1.5;}
+  .sidebar-widget{margin-bottom:2.5rem;}
+  .widget-label{font-family:'IBM Plex Mono',monospace;font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem;}
+  .widget-label::after{content:'';flex:1;height:1px;background:var(--rule);}
+  .stat-block{padding:1rem 0;border-bottom:1px solid var(--rule);}
+  .stat-block:last-child{border-bottom:none;}
+  .stat-value{font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;line-height:1;letter-spacing:-0.02em;}
+  .stat-value.up{color:#1a6b3a;}
+  .stat-value.down{color:var(--accent);}
+  .stat-label{font-size:0.72rem;color:var(--muted);margin-top:0.3rem;line-height:1.4;}
+  .sources-list{list-style:none;}
+  .sources-list li{padding:0.5rem 0;border-bottom:1px solid var(--rule);font-size:0.72rem;line-height:1.5;display:grid;grid-template-columns:16px 1fr;gap:0.5rem;color:var(--muted);}
+  .sources-list li:last-child{border-bottom:none;}
+  .src-num{font-family:'IBM Plex Mono',monospace;font-size:0.6rem;color:var(--accent);}
+  .sources-list a{color:var(--ink);text-decoration:none;border-bottom:1px dotted var(--rule);}
+  .report-footer{border-top:3px solid var(--ink);padding:1.5rem 4rem;display:flex;justify-content:space-between;align-items:center;}
+  .report-footer p{font-family:'IBM Plex Mono',monospace;font-size:0.6rem;color:var(--muted);letter-spacing:0.08em;}
+  .footer-rule{font-family:'Playfair Display',serif;font-size:0.85rem;font-style:italic;color:var(--muted);}
+  @media(max-width:900px){
+    .masthead,.hero,.report-footer{padding:1.5rem 2rem;}
+    .hero,.report-body{grid-template-columns:1fr;}
+    .report-body{padding:0 2rem;}
+    .side-col{border-left:none;border-top:1px solid var(--rule);padding-left:0;}
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+<div class="masthead-left" style="display:flex;align-items:center;gap:1.2rem;">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAbkAAAEWCAYAAAD7HukTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAOdEVYdFNvZnR3YXJlAEZpZ21hnrGWYwAAItpJREFUeAHt3c92FEfa5/EnsiSM3/Oe0/LcgJMrsGiahrc3FFdguAJKm54BFkjLWcxLcc7sEQvA7Y3EFWCugPJm2m7Di3wFLu9mN+rzntdgSZUx8WSlhLCF/mRkZkRmfj/nFMKWACEl+cuIJ+IJs7q6agVq+zevqXv9XPx8S9+ur69vCSrF9feBbTn6OvynFNegvnXX4bagFu56/Mm9SaUD/tviO/lfF36QTjOyaW6/XjnuQxYE+5aK10e5fwD6ZiLzG86PMr/hEHyoyonXoHLXoV5zU5lfgxMh+ICPIuTObli8cu6GM5V56L1wr4m72UwFqNdy8brhXvf1f7jrcCLFdeiuwYkAyBFy/tLipTec/ZvNMyHw0Kxh8VotHrwm7vWMwEPfEXLVGxavg8BzN5pNAZqTutdIX4cC7wEPXegjQq5eQ325G41OKU2EGw2al8r7wJsID13omUTQhFTmN5qf3I1mw71SAZo3dC+9/vQ6HAnQA4Rc80ZC2CGsVAg79AQhF85ICDuElcr7sFsWoIMIufBG7vWSJ2oElLrXGx640EWEXBxSef9EnQoQxkh44ELHEHJxSWU+hXlfgDBSmT9wPXSvE7uvALEj5OI0djeY54zqEJD2sHvDNYi2I+TipR1UXnKTQUCpzIPuhgAtRcjFLXWvN2tra7cECEOnLJ8zhY62IuTit2St3eQmg8DGXINoI0KuPbjJIDSuQbQOIdcu3GQQGtcgWoWQax9uMgiNaxCtQci1EzcZhKbX4KoAkSPk2mvMqksE9pCel4gdIddi1tp19tEhMJoWIGqEXLvpHqaXtF9CQKl7bQgQKUKu/VL3eihAOEPqc4jVgqALRu4e82J9ff0bwUm2i1eMUmkvrc9N3DW4JUBEQoSc/iNYk3gsFS+VFj//onjbpqL6RnGTifUGHost9zW6LpEqpp7T4qXXn16LQ3l/jcZMZxSi/dqin0KE3La7yUykBYobzlDmzZKvSdxP2vq56k1mRdBaxUPKVvE6GJm7a3Eo8/PeYr4O82lL93dYFyASTFceo7jhfFO8Dt9oYl26r9OWz9ryEIHTK76n+pLiUFPdJ5lKfO67z2+TGQXEgoUnZ6A3GvcauZ9ecK8H7jWV+LBJvOPcNaghotegjtqnEhedUWARCqLBSK4Ed4OZyrzjw6a+lbhGdjplNNIboaDTiu/xZrGyUR9uYqnb3StmLRnNnc5EarBjB/J/d/5Vumwh2fvxxI8RlFaEnU4Rjt3blxLP9JHe8DYFvaBp4q5BnVKP5RrcH82NBSeqcyHU/xYwXVkBDbti+uiBxCHlNOd+OXQNPpI43KNJAWJAyFXI3WTGMq+TxDBNc0/QOzqokzgetqjNIQqEXMWKOolOP4QOumGxGhQ9UzxsxRB0PGghOEKuBkXXhxiCjinLnook6JZ40EJohFxNiqC7KWHdoi7SX0XQhW71xoMWgiLkalRs4A3ZwqxtrclQvdB76TjzEEERcjUrWhyFfJrmJtNjxV61kK3emLJEUIRcM0KuuGS6qOeKGYWQD1pDAQIh5BpQPE2HWgSgT9JMWUKnzUM9aF0TIBBCriHFtOVUwhgKeq3ozvNMwuAhC8EQcs0KNZr7QoBwrd6YTUAwhFyDio3iIaaMhoLeK7a1TCQMQg5BEHLNC9FbMBVg7oWEQcghCEKueRMJwE0XpQKEm7L8gwABEHINK5Zzh5iy5Eka+yt9p9I8rj8EQciFMZHm0d4L+76V5nH9IQhCLowQN5lUgLktaV4qQACEXBhTAcKZCtAThFwYU2ne5wLMTSUAFj8hBEIujBhODkd/cf2hNwg5AEBnEXJA/7DSEb1ByIWRChBOkJArmkQDjSLkwghxk/lZgLlUgJ4g5MKg+wNCSqV5UwECIOTCCHH0zVSAuRCHmLKiE0EQcmEMpXlTAeZCzCQwXY4gCLmGra6uDiVMTY4naYS8/kK0EgMIuQBuSQDFgZlAkOtPCDkEQsg1byjN4wYDHcXpCG4oYUwFCICQa5C7yYwkzMo26iFQNyTM9bfNTAJCIeSadV/CmAh6rRjFhbr+QhwtBeQIuYasra3dk3CbcCeCvgt5/X0jQCCEXAP0iBFr7aqEMWWqqN+KI27GEs5EgEAIuWY8FEZxCOelhDOhZyVCIuRq5p6itQ5yQ8J5Iegtd/2FfMBSzwQIiJCrkbvBaLiNJRydqqQe0lPFA1aoaXKlDQi4/hAUIVcTd4PR1kkbEtZE0EtFwI0lrG/cQxaddhAUIVeDIuC0DhL6cMoHgt6JJOAU1x+CI+QqVvQGjCHgKPj3UFGDG0t4m1x/iMGCoDIRPUErCv49UmwT0OnxocSBUdwpue/dWGrw2cI7+fcLr6SVEpmY268mUgFCrgIR3mB0wcmmoBe00YC1dizhZw/2MYo7m1o60RijP1hppUw/+WrWFBByHopWSdpJQlewxXKDUTxF90AxNX7fBdxQ4sL1h2gQciVEHG5qwiiu2/bDTeKZOTjsAaM4xISQO4Pi5vKle40kvnDbtyLonEMPVkOJM9yUTpOPBYgIIXeMotY2dK9rMu9aEmuw7XvEU3Q3FKGmW1H02htKvMF22HUBIhMi5NLiXLWYpMXbP8g8yJaL/xd7qB02da91wUlivv4+lw+vvzZhmhJRChJyEr4TSBetcZM5lVS4/qo2YZoSsWIzeDc8oEclApkKdWBEjJBrP4r9CEX7Ul5nBgExI+TabSoU+xHOCgGH2BFy7XaTmwwCWWOKHG1AyLWXPkVvCdA8rQGzkhetwD65dnpAVxMEskbAoU0IufZ5wEITBLLCwxXahpBrFwIOIeyvomR6HK1DyLUHT9EIYSpsE0CLsfAkfvoUfZGAQwB68O5FAg5txkgubjo9xDYBNE0frFhBiU5gJBevR8I0EZo3kfnojYBDJzCSi48+Ra+w0RYNY/SGTiLk4qLBpgG3LUBzNmW+/43rDp1DyMVhKvNwmwjQnInMR28TATqKkAtLn5y19rbOUzQaNBHCDT1ByIVBuCGEiRBu6BlCrlmEG5o2lfl+N665eNVy6OyizESslXaaVdZdh5BrxlS40aA5eo3p9fYNo7b41dno4X8KCLn66I1GV0s+40aDBkzc64W+pcck8B4hVy0NNr3B7D9FM2pDEzTYOCEeOAIh509D7VuZj9q2CDYEkK6uri5x7QG/R8idzVTeh5q+JdQQg9S9nrsXozngN0KE3HbxitFU3n9+/yz+W18aaNsEWifo9/KRVO+hey1JOEM3mlulLRfwoRAht0X9AAFt17GazeWLvtmQsB66z2OLhU7Ae5xCAFSgCM46RohnteGCLhUAOUIOqM5Y5tPbIaUSfkQJRIOQAypS1Gx1Kj507Vbrc/cFACEHVKk45PaBhDd2QTcUoOcIOaBixQrHGA69pT6H3iPkgHpo092phJUK9Tn0HCEH1KCoz92U8KjPodcIOaAmRaPkNQmP+hx6i5ADalTU5yYSHvU59BIhB9SP+hwQCCEH1KzYVlDL6c9nRH0OvUPIAQ0o+knG0PaL+hx6hZADGuKCTrs4TyQ86nPoDUIOaJZOW4Zu+5UK9Tn0BCEHNIj6HNAsQg5omAs6bflFfQ5oACEHhDGW+SnloVGfQ6cRckAAh9p+UZ8DakTIAYFEdCyP1uceCtBBhBwQUNH2K4b63Cr1OXQRIQeEN5bwbb/Uc+pz6BpCDggsomN5loT6HDqGkAMiENGxPNTn0CmEHBCJoj73jYRHfQ6dQcgBcYnhWB5FfQ6dQMgBESnqczG0/aI+h04g5IDIFMfysH8OqAAhB0TIBd1Y4jiWh/ocWo2QA+IVw7E8ivocWouQAyJVtP1i/xzggZADIlbU52Jo+0V9Dq1EyAGRc0G3KnEcy0N9Dq1DyAHtEMOxPIr6HFqFkANaoKjPxdD2i/ocWoWQA1rCBd2mUJ8DzoSQA9plLHG0/dL63A0BIkfIAS1StP26LnHU5zaozyF2hBzQMkV9Loa2X1qfey5AxBYEQOvosTxuFHXN/TT0lOGy1ufcpxPDophWcl+/sdTgs4V38u8XXkmvJTIh5ID20rZfy+6VSlhan/vWBV0MZ+G10X2pgTH6g5VeywzTlUBbFfW5GNp+KepziBIhB7SYCzrthBLL/jnqc4gOIQe0nNbnJI5jeZbZP4fYEHJAN2h9birhsX8OUSHkgA4othWsSByozyEahBzQEREdy0N9DtEg5IAOKY7lmUh41OcQBUIO6B6dtoyh7Rf1OQRHyAEdQ30OeI+QAzqo6D5CfQ69R8gB3TV2ry0Jj/ocgiHkgI461PYrivrc2traLQEaRsgBHRbRsTxirV2nPoemEXJAxxVtv6Kpz7mgWxKgIYQc0A9jiaPtlx4NVMvRMsBRCDmgByI7lof6HBpDyAE9EdGxPNTn0BhCDuiRoj4Xwwne1OfQCEIO6J9YjuWhPofaEXJAzxT1uVjaflGfQ60IOaCHimN52D+HziPkgJ5yQTeWOI7loT6H2hByQL/FciyP1udGAlRsQZp/kouhYSziMZFmcf0dom2/3AhK98/FsAAkhrDV62MqHXAusSLG6Hxw+tEPsm4UbaTTI2gjAAB8hH16Nf3oO7PZkiT2+JDMsvTY90ty/PsT8/mx75djQlyyZwIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADoiyqN29GiHWSZD98mlksjnRmxqrfv5XPqbD58aPYfKyLYVM5VMfk6M2RJjt8zt76YCAOitKEJOQy2b2RtmQa7ZmR2KMVUd4jc1iWxlM/NikMiE0APQJ8eeBdc1589vm5XJ7w7eDRZydmO4JO9+uZdZM5Lfj85qYYxMssw8I/CA8Ozjy8uSZPcEx7Pywtx5/Y2UYJ9eeul+/VD6wJoH5u6r8W//94I0zD1ZDK3Y+9nbt8OmM9ZNeQ6NscPMisyeXtlMxDxzYTcRoEXsV5eeu2n5G+LDmOvm9quJhKQnSlsZCY5nzc/ux1IhhwZDbu/x1VGS2FuZddORMXD/uDKxo+zplYkR9wTQ8rCzTy5ZKcsmK+buD5vSAu7vuene3JIyjHEj+FfXpcXy6ads1y/g5r+Tfg0nAnRcIjXTkZsLkpduBLVhIxw26+fkgvelfo69mr9GO2U7Q6mClRt2Y7mq2jcQrdpCLl9M4oJDAyTGcPutIux+ctOYG4QdomXMfanGkrxdGAnQcbWEnP3qyr0sy960Idx+R6cxXTDr9KoAEbFP/zSUKhdpGfulAB1XacjpisnsyZ+fZ5msV7gNIIQ0n159cvmhANGw5WqRH/3tZFgEJ9BZlYXczuPLy9nbt2+smAqK4nHIJFmdPbnyE9OXiILvisoj2c78ewWOUknI2b9dvTUQ81Ia2u/WsFSnL3e+/suyAIHYx38ciZHqZ0esVDs6BCLjHXJulHM/m9nNlk9PniQd7M1eapgLEEJi6rr2lpiyRJd5hVwecNaOpR+WNMwJOjQtny6vdRGXrWrFJhCd0iHXUMBN3Qhx071ds2JvJsZc0NfgzvdGX/rzmc0uZsboBt81M+8KMJUaEXRo3m69IaQLUNgzh44q1fGk1oCzdjuT5NFCIpsn9Zf8zfsn7rWuP9l9enVorIyM2GtSQ52wCDox//27ZwLUrYmtOL8srLofxwJ0zJlDTkcx7iY/looZYyYzkQeLd76fiKfFeYsufcne06sjY/PpmFQq5L4G6ztf/+XHc3/9P1sC1CSvl1mbSt1Mvj1hLEDHnGm6Mu9ispetS7WmOt2Y3P7u+mIN/SMXbn+36aY2L1hjVqTaqcylwd7sOdsLUC/b1NR4ygIUdNGpR3J5wFn7sspVlJmRRwvnPx0PjjgDqGoadu7vMJlZGZvqbhyptfa5e3tRgIrNF5zsjqQx+Z65iTRlYLZlz06leamUN5Wmmaz2++MxtsWaR9IGydHX7ulDzmYP3Vc7lSpo3S1Jbi423Pm/qOGNdp7829ZAskq6mViRZe2MYu78sCZAlbQZs2nwOCort+zG8tisbDVyUzV//UGn+i9Ig+zTZffgMPhJyjKL13t2FuX2UWe0tcmppiu1F2WFnUymSZJcXAx4tM25O39f15WZUtFTmXZG0cUuAlSpbDNmK2VDiqbN6JwTQy6fpqxooYl7Jt1KPv30YgxPQvo5JPOtB1OpQGLtRn7aOVAB+/Vl7bCTShnJ7KILunJTTDRtRsecHHLWPqyiDqcBZz799LppoP52WhUHXSpv/4tNtajGLLsnpZgtc3trKokpd5K07pmbByzQCceGnB4342pOVUxTTo0xN2MKuH1VBh3TlqhM+b1x+d5Nc/vVpPS05S5Nm9Edx4acMZW0+8lDJOZirX5uM5vdlAoMaJEET3kz5rJTlWbv8AiuXLMCY0uOIoH4fDTkikNDU/GUGbPShtVI5+7+sDWTxHuFpB4Uy2gOXko3Yy6mKt//PuWmLGnajA75aMhVMYrLrH0QchXlWemqy6L/pRdGcyjLsxnzByM3rylLrmF0xJEhV9Eobrp49x9jaRnz668ruo9PPDCaQ2nZ3kjK+nCqcl+5KUuaNqMjjgy5KkZxs4VBJTWuppm1re2ZGTwQT4zmUIop2Y3HmMkHU5X7yk9Z7jdtBlrtdyG39+TPurIqFR/GbLa5cXE+beluGuJBR3P0tcRZFHWwVErJjhyxeU1ZGmHPHFrv9yO5Ck4gdr+p90gotFkFf4csy0YCnJpPT9Vscsw7Sx4JZZdZgIK2+yDkdORhMs99cW4U14Xebrpgxnc0574WLMXGqRQLTkZSxsemKvf5TFkKe+bQbh+E3CzzP5yxC6O4fRWM5pZYgIJT0WbM5X/xsSO1fMpSTLnywbxpMwtQ0FofhFySiNdUpTEy6VKH7nz7g+dKy4QnYZyGSTxG/cdOVc5ZeSHl0LQZrXYQcvbh8pK1digeMjEl5/5jlvidpWQp3uN4816Rtly/SCObx05V7tvZK3/YMU2b0WIHITf75NxQPA3On/feSB2bLPE+RDJllSWOVboZs5x6hKZbY1wgTqQMVgqjxQ5CzlgzFA/WyIsYGzD7Kjq2TMVDZpmyxDHKdziZmjuvT/9gaU3ZKUu/TepAQO9DLjFfiBfTuVHcgfL1jDnj+7VFV/k1Yz7jyOzXvc3ye+Zo2ox2el+T86zHDQZJazd/n8QaOxEfnl9bdJjXvtSz1cDzKctB6el3mjajlRb0h52v/7IsezPxsG1a3OHkJINfdybZJ5+Ih1RPDe/idC7Km++N2x1KOdP51oCz/qHmUfm9b3mruomgV6Kqx54/v33W+2gecsneXpqf3V2SMdLZgFN5P8snV6bi0+5sdyd1P3b664Qzsnvla7W23EpmDUb7+JIuQjn73jcry7pnzqxs8bDWH/og9pPE4pfZivtx8yy/JJ+uNDbxOu7eivwoHWcTv4Ca7WZeX2N0kUedK3H1tfLKbvVhzxxaJw85a/waMtvMdH6EYmbys3gwxtI1Age8mjGf1MbrJD5tvtgzh5bJQy4x8rl4cKOcqXScFc8g93yQQNd4NWP2arpQ1PKmUka+Z44FKGiPRCqwMEi6P0dvMs+/o/mDADLvLlS6GXPuFG28TvwkfLoTse8T7TGfrrQ2FR+L56bScQPjF+RW7GcCqHNJ+ZDQpgs+U5X7fNp80bQZLVLJSK4nS+On4sF9oRnJYc5nb5w928qyj/Fq86ULUH5ZZDSHVqgk5ACcTnFu3FDKOVsbrxM/GY82X0nmfbgy0ARCDmjU7n0py1S8EdunzZcuQGHKEi1AyJ3S7iDhHzT8lR/FiVR8lFU+Zemz//OXhVUBIldJyPXhGI7FWUbIwYtXM+aybbxOZMqffk/TZrTAfsjRpqdmVsxU0G8DU34jtfE8CeNjv60Gpy3975+mzYjefAuB52buPen+RufMljy5+YD9p6C38tmOTDxWJM7KL/k/WflpUEZziFzeoFky88+8A2VJJutBNw9rltw/aCnNdr8rDI6R7Qy1k3kpvm28TqJtvmzJsMrmC1Bo2txZ2/OTKyKxePYach5yRm/A5Q8hEJP4jnLiZwf2CxfmpSVip4L+Mqb8qkrPNl4nyU8meHJpKuVmZPabNtc50kQ42+buq7G02Hy60nOjs+3BdKX3aHVhYSroJa9mzLkK2nidxKfNF02bEbE85LJFv1O93UjwmnRY3mtQxGu02uVDZXESj2bMVbXxOonP0T00bUbE8unKc+4GPHv85203pVJ2mfySFtbN7e+m0kXnzy+7moWUZcQScD2VPyDpgpOy5QBrfmouQPIp9VRKyZs2TwSIzMLBz0y+xL30aCWz+UXeyXn5LLM3fGqWmTFeZ9GhxbQZc5lTuA/YVTdSin/T9bxp85gFKIjN+83gVr4VD8ZId+flvf9uHodUot18mjG3y5K8HQwFiMxByFljJ+LBzeYt241h57qC7Hz9Fx3dpuJhMEiYruwhz2bM7WOEPXOIzkHIDX7dmYifpdkv7zp3/MZgdzYSP9NGFp3YnnStSXyOLGp6G4dHM+Y2omkzInQQctqs1RgzEQ9JYrs3NeM7Ven5NT39n+MRcsa258ZkpU2f61D6hqbNiMwHDZqttV798dyU5XD36dWhdMTe46sj8ZyqzHxaJp2J8Qm5VNrCmvIhlzW3AMg+uaSzGqn0DW2+EJkPQi759ddN8ZRId0ZzSSK+f5fp4u3vJtKExGsqLpXW8OiuYxqc0vW/dtqKps2IygchV8WUpZuiGXXh6B33dxi6ke1QfDQ1ValmUn6U0pLN/Pbry37t44w0sgDIvxlz23WwbIHW+t15cjOR8udLFTKxrS+4Z9ZuiKekgq/l6XltOF9qxYPJnudDx/m9Zla5ajPmPrNygwUoiMXvQi6fXrPWb1rHjebaXJurohZnjEwa7QCzOPC7gdu9+EceifUZcW43tlHZqxlzJ+w3bQaC+8jJ4In30QoDax9KC+XtyYz/SNRY2+jxFOavP2x5bSOIvMnuQXussoxpaKrStxlzR9C0GZE4MuSSnXfrvqM5K7Jsn1xuXdAVU62p+JmaO/9ovstJ4lFzin2Pk7bH8mHrOVn7iD+IepSiaTMisXDU/9QFKLPHV91IxG9Ek0my6qYtXzS2wtCT/erKvSyTkXiyxjRYi/vgD3Y3co+61XyP01hi5DsF2NCiE69mzPnhpaaZKdXTyrLyvTezfJ/gRICAFj72Dh3NZZ98ok+lqXhIrN1wU4DXYz+hQKcps8x6N5jWWtzg9nebEoLZczfJQfnRs7H33GhuPbYmu/bxH0fidx1O9WBQqVn+efo0Y7Z7a40cq3MG9vGffi79sDvfMzcWIKDkY+/Q0VxFI5LUWvs85r6WecBZ+1IqYMSsSCD5DdJ4PTkvybtBfFPM/qO4iTTBpxmzMZPYAi7nc84ce+YQgeS4dy64EYmpYK9XXp97+/ZljEF3KOBS8WXMZvARa2a8TpPI9znOu3VEwT79YwU1Uo9Tr0/Jvxlz1lBnnLPxf3Bq/3YitFty0ge48sKK95YCiTPoKg04NyXW7L64j9jZW6+gWfNGDPvm7FeX7rka1Vj8NDJVKdmuX8/G81nzC5VOK6/1lv21NG1GWCeHnBuZzMygkpu3Bl329u2bKG6g1QZcvtgkhrqjTjOLf7/MJbG7L0N+n+zjy8uSVXAIr7HNPHj4NPI2shn1YaO/ek1Z0rQZQZ0Ycurcnb+vm+paVOXhUpzTFoT929VbWZa9kYoCLjPyaCHUYpOjJDP/cNCvTaCgs3+75GpbWRU1UjeK+49NqZn/3jgT5VTlvvzByWfK0rCtAuGcKuRUPm3pbhpSjXSwN3Mjuj83Ol+vU6X2yZWH2cxuuvpZVVMo08Xb30f1pJrXUaxUsRldg+6NffLHxv5+7s96KDPZ9FqluK+pUZzf3rhmplN9ZdYniFMWoKAO+T3968vLurLZfvWnh/bppQ375NIb+/jS/9v/mIXT/mY6Fbfz+PLNgUneSEUyV2+ZPbkystY8WLhb70hIW3Vlv/zysMJwU9PEmOsSo53ZWM4NblUQFu7Xm4euPnZN7OJaXVOy+U3QykOvUwY+1NAoThec7I6kLNOSfWQ7rmZ4bvCw/PVkdTHTRNB7+bqMd+/m19FgtiQz68ojxSv/AHeNmWT+88R+fuiXpvP3F0eD6bFbb/9z/nHGaKC8/0hz5E9PZ+fJv60OJKt8mXne61HyutZEKpSfJiD2vq3hAMuZzS6eu/tDM5uMS5iPwEy13ytXP5JB8ihvI1aB+RO+vV/5AaNmdqGJJfnzvXGmfDPvheRiVV/Lurmn43X3/S97Xty2fOq+J4Frj/bpsnsoGfwkZZnFC7Hv+T3MjWxe9vLwXsfceZ3n26lHcvu0Prf7+OpSYqpdGqwh5MJo6EZ2Ux3ZDZLyDY5t3hw6u5ZlsprZek69tsasnLvz4c3JujpjtjMbysB8YYxdspnsj0rSQx82dV/5bT2gdnD3H2OpkbnzH+vuIv+y0ovcykj2Mt1mMJ136JAXcv5ft8zK5FQ3r/wp7u1/Dt2vveaeEkZSx/fHXT/mTkN7zkxyL19SVc60LQGXy7/fpQ9F3W/aXEW9GDi1M4ecWrz73dgFnVQddAVtkLyhI8/syZUtq+2YZvJjMsgb7E4PB9/BsNea5SzLUg0X949wmOXDWVNinHo67vd/sHjn+03987P/ejsyA/nSZnY523NDb61yusS2H7/vpfoukzTUvund7KZ8Mqhskc0hqftCaK1u1YWWnoS9VRxKOs3fa9zf73CAWQ18qwGX5v+t3+Bavj9my9x9NZYG5Ofb7WUe06um0SbevrR26EZz26WnLOdNmwk5NKpUyKmagy6nWw7ym2OSB0v+/9xI7+D92du37z+yCJe6zUTWFpNkK3t65aWr8bnPzSzlf6ypKVE95Z1rXC01X61YxWKOj1v+YEBz5Pei9q/RVMzeTWnKLCs7qpnTNmytY8r3tNXZGvdg0KrRK1rv1Ksrj6JBl9lAzYhDMGZzwciXugUir/FVu4ilNkbrholdk25zATe73mhrLJ9p4FjbeJ0k8Vw8spsvQAEa4xVySoNuJknXb6Bz1o5sS4u4+UpDY4P11axZ4wHn3zQ6zjZeJ8m3O/jtmfMb/QJn5B1yShej6EpDqW4fHWpwEHT+bb9i0vwITvk0Y85lE2krv/6oNG1GoyoJOaVL6XXPWIWdUVCD+d6xRPf2TaX1zFaIgPNuxmzkRSunKvdpf1QvNG1GcyoLOaUrH5Pb313vVZ2uhfIanQuH1mxEPoqRR+bOq4tBwiLbG4kPK5vSYt5tvmjajAZVGnL7tE7nRnUXbJK0cPVYP2g4mNuvr+uespZNX7rpSTdjcPt1uFZqxrON153X7f934XMygaJpMxpSS8gpHdUt/I+/39RN00KtLlr5nrJkpvXUuBdCaBBrIH86uxiy16N3M+Y2j54P05MJfB6OfE5tAM6gtpDbp935B3e+v0DYxSsf1d15PZIFF3ax1VT1RqqtxFwQayCHP5LGt6N+3CcOnFY+ZZmIx343u8wCFDSh9pDbdzjsWJwSJ/PXrS03SrqufR8l9Mhuf+T2L9qD8vVKDAs1igUnIymvHScOnJpv7Z09c6hfYyG3T8NOF6dozS4zibY1mgqicjCy+3T2Wb7loKmHknzUlmzmNbe7rz+LY+R2SLYzFB9G/OpYkckD22fK0sotFqCgbqXbevkqelDmvQ93Hl9eHphk6EZ4X9osW25LJ5GuKwJmU1/5zejdwvL86dt8IZld9m4TpjfIxGxJJt9qJw1zJ/ZRTpJq1xspbbd7fRvzTjqDa1LWO6O9PyfSkGJGIM4efKhFlN9sDT030kutGQwHNvtcQ8/OzxBKpSP0aKHk9vdxnkV3SgfBp82xNQBUYj4/8oMz+7OYbHv+5D/Ykn/ZnUY1SgM6aN6Zp/i32TNNNWoHACCY/w/3H2S5yq+2HQAAAABJRU5ErkJggg==" style="height:40px;" />
+    <div>
+      <div class="label">Sector Intelligence Series</div>
+      <div class="publication">The Prequate Briefing</div>
+    </div>
+  </div>
+  <div class="masthead-right">
+    Q1 2026 &nbsp;|&nbsp; FOOD AND BEVERAGE<br>
+    Prepared for: Runs a probiotic beverages company<br>
+    Generated: 7 March 2026
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-left">
+    <h1 class="hero-title">Food and Beverage Intelligence Report</h1>
+    <div class="hero-meta">
+      <span class="tag">FOOD AND BEVERAGE</span>
+      <span class="date">Q1 2026</span>
+    </div>
+  </div>
+  <aside class="anxiety-card">
+    <div class="card-label">Focus Anxiety</div>
+    <p>Is the market interesting enough?</p>
+    <div class="audience-tag">FOR: RUNS A PROBIOTIC BEVERAGES COMPANY</div>
+  </aside>
+</section>
+
+<div class="report-body">
+  <main class="main-col">
+
+    <div class="section">
+      <div class="section-header">
+        <span class="section-num">01</span>
+        <h2 class="section-title">The Macro Pulse</h2>
+      </div>
+      <div class="section-content"><p>India's Q1 FY26 economic performance reveals a critical divergence: robust domestic growth against escalating structural trade imbalances. Real GDP accelerated to 7.8% y-o-y, marking its best in five quarters, fueled by broad-based gains across services, manufacturing, construction, and agriculture, alongside a significant 52% y-o-y government capital expenditure surge. This internal strength, driven by sustained investment demand for electronics and capital goods, masks an intensifying reliance on imports, particularly from China, which surged to a $72 billion deficit between April-November FY26. Concurrently, exports in labor-intensive sectors like gems & jewellery (-8.3%) and transport equipment (-5.3%) contracted, signaling softening demand in these critical employment generators. This scenario indicates that India's domestic resilience is increasingly underpinned by an import-led consumption and investment cycle, rather than export competitiveness. Total merchandise and services trade reached $439 billion, up 3.5% y-o-y, but this stability is superficial, given the widening deficits with Free Trade Agreement (FTA) partners (imports up 10%, exports down 9%) and persistent structural friction points. The proposed Budget 2026 customs duty hikes (7.5-10%) on engineering goods, steel, machinery, and consumer items, coupled with fiscal incentives for semiconductors and critical minerals, represent a strategic pivot. While aimed at reducing import dependence and upgrading supply chains, these measures must contend with India's entrenched logistics drag (14-16% of GDP, double China's) and the sustained competitive pressure from China's dumping practices across global markets. Without addressing these core inefficiencies, domestic manufacturing competitiveness will remain challenged, risking deeper external vulnerabilities despite the strong headline GDP growth.</p></div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <span class="section-num">02</span>
+        <h2 class="section-title">Friction Points</h2>
+      </div>
+      <div class="section-content">
+  <div class="friction-item">
+    <h4>Entrenched Import Dependence for Critical Intermediates</h4>
+    <p>China's comprehensive manufacturing ecosystem provides unparalleled scale, cost-efficiency, and established supply chains for electronic components (comprising 22.3% of India's imports from China), machinery, and chemicals. This structural advantage makes it difficult for nascent Indian domestic suppliers to compete on price, quality, and volume without substantial, sustained capital investment and technological leapfrogging. Second-Order: Indian electronics assembly firms and capital goods manufacturers reliant on these Chinese intermediates face higher input costs and potential margin erosion if duties are imposed, or suffer from extended lead times if forced to diversify sourcing. Third-Order: The inability to indigenize these critical intermediates creates a bottleneck for India's broader 'Make in India' ambition, particularly in high-tech manufacturing, perpetuating a reliance that can be weaponized in geopolitical contexts and slowing India's climb up the industrial value chain.</p>
+    <small style="font-family:'IBM Plex Mono',monospace;font-size:0.65rem;color:#6b6455;">NITI Aayog Trade Watch, 2026</small>
+  </div>
+  <div class="friction-item">
+    <h4>Uncompetitive Domestic MSME Ecosystem</h4>
+    <p>MSMEs suffer from fragmented supply chains, limited access to affordable technology and credit, and disproportionately bear the burden of India's high logistics costs (14-16% of GDP, double China's). This structural disadvantage prevents them from achieving the scale, quality consistency, and cost-efficiency needed to compete with both imports and larger domestic players. Second-Order: MSMEs in labor-intensive sectors such as textiles, automotive ancillaries, and basic engineering goods face severe margin compression and potential exits, leading to job losses in regional manufacturing hubs. For example, smaller component suppliers to transport equipment manufacturers (-5.3% growth) will feel immediate demand erosion. Third-Order: Failure of the MSME sector to thrive limits job creation in the formal economy, exacerbates income inequality, and hinders the development of robust, diversified domestic supply chains necessary to support larger industries and export ambitions, undermining the 'localization' agenda of Budget 2026.</p>
+    <small style="font-family:'IBM Plex Mono',monospace;font-size:0.65rem;color:#6b6455;">Economic Times, 2025</small>
+  </div>
+  <div class="friction-item">
+    <h4>Asymmetric FTA Trade Dynamics</h4>
+    <p>India's existing FTAs have structurally resulted in a widening trade deficit, with imports from partners rising 10% y-o-y while exports fell 9%. This asymmetry suggests that these agreements may be primarily facilitating import access into India without commensurate market access or competitive gains for Indian exporters, particularly in vulnerable sectors. Second-Order: Specific Indian manufacturing sectors, such as chemicals and certain consumer goods, face increased competition from cheaper imports from FTA partners, pressuring domestic producers' profitability and market share, intensifying the struggle for MSMEs already battling high domestic costs. Third-Order: The widening deficit undermines the strategic utility of FTAs as tools for export promotion and economic integration, forcing a re-evaluation and potential renegotiation of existing agreements, which could introduce trade policy uncertainty for businesses reliant on these frameworks.</p>
+    <small style="font-family:'IBM Plex Mono',monospace;font-size:0.65rem;color:#6b6455;">NITI Aayog Trade Watch, 2026</small>
+  </div></div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <span class="section-num">03</span>
+        <h2 class="section-title">What Changed This Quarter</h2>
+      </div>
+      <div class="section-content"><p>The most significant structural change observed in Q1 FY26 is the articulation of Budget 2026 proposals, specifically the intent to shift from reactive tariffs to coherent strategies addressing quality, scale, and financing gaps. This is evidenced by proposed higher customs duties (7.5-10%) on engineering goods, steel, machinery, and consumer items, coupled with fiscal incentives for semiconductors, critical minerals, and MSME support. This represents a planned structural re-orientation of India's trade and industrial policy, moving beyond piecemeal interventions to foster domestic supply chain resilience, rather than merely reacting to import surges. Additionally, the 52% y-o-y surge in government capital expenditure provides a robust domestic demand stimulus, laying foundational infrastructure for future manufacturing capacity.</p></div>
+    </div>
+
+    <div class="inevitable-block">
+      <div class="label">The Inevitable Conclusion</div>
+      <p>IF India's domestic manufacturing ecosystem remains fundamentally unable to compete with Chinese scale and pricing, AND the targeted reduction in logistics costs to below 10% of GDP by end-2026 fails to materialize, THEN the widening trade deficits with China and FTA partners will persist, shifting the current account deficit pressure from petroleum (due to soft global crude) to high-value industrial and electronic intermediates, exacerbating long-term external vulnerabilities UNLESS domestic MSMEs can rapidly upgrade quality and scale, driven by specific, accessible, and well-executed government incentives.</p>
+    </div>
+
+  </main>
+
+  <aside class="side-col">
+    
+
+    <div class="sidebar-widget">
+      <div class="widget-label">Watchlist</div>
+      
+  <div class="watchlist-item">
+    <span class="watchlist-num">01</span>
+    <div>
+      <h4>India's Logistics Cost as % of GDP</h4>
+      <p>Reduction in logistics costs is a stated policy goal critical for enhancing export competitiveness and MSME viability, directly impacting the cost base of almost every physical good produced and traded in India.</p>
+      <p style="margin-top:0.4rem;font-size:0.78rem;color:#6b6455;"><strong>Watch for:</strong> Official quarterly updates on logistics cost percentage. A failure to show a consistent downward trend from the current 14-16% by end-2025 (e.g., remaining above 12%) would signal systemic policy implementation failures, particularly impacting MSME competitiveness.</p>
+    </div>
+  </div>
+  <div class="watchlist-item">
+    <span class="watchlist-num">02</span>
+    <div>
+      <h4>Import Volume & Value for Budget 2026 Tariff Categories (Engineering Goods, Steel, Machinery, Consumer Items)</h4>
+      <p>The newly proposed customs duties are designed to curb import dependence and foster domestic production in these specific sectors. Changes in import volumes and values post-Budget 2026 will indicate the immediate efficacy of these protectionist measures and the responsiveness of domestic producers.</p>
+      <p style="margin-top:0.4rem;font-size:0.78rem;color:#6b6455;"><strong>Watch for:</strong> Q2/Q3 FY26 import data for these categories. A sustained flattening or slight decrease in import values (not just volumes due to price changes) alongside announced capacity expansions by major Indian industrial groups would signal successful import substitution and domestic supply chain strengthening.</p>
+    </div>
+  </div>
+  <div class="watchlist-item">
+    <span class="watchlist-num">03</span>
+    <div>
+      <h4>Public Guidance & CapEx Plans of Major Indian Electronics Manufacturing Services (EMS) Providers</h4>
+      <p>Companies at the forefront of domestic electronics assembly directly benefit from policies promoting 'Make in India' and curbing Chinese imports. Their CapEx and revenue growth projections reflect confidence in domestic demand and the viability of local supply chains for electronics (which constitute a significant share of imports from China).</p>
+      <p style="margin-top:0.4rem;font-size:0.78rem;color:#6b6455;"><strong>Watch for:</strong> Q2/Q3 FY26 earnings calls. Any significant upward revision in CapEx plans or long-term revenue guidance (e.g., >15-20% y-o-y growth projections for the next 2-3 quarters) that explicitly cites Budget 2026 incentives or import substitution trends.</p>
+    </div>
+  </div>
+    </div>
+
+    <div class="sidebar-widget">
+      <div class="widget-label">Sources</div>
+      <ul class="sources-list">
+  <li>
+    <span class="src-num">1</span>
+    <span><a href="https://niti.gov.in/sites/default/files/2026-01/Trade_Watch_Quarterly_April_June_Q1_FY26.pdf" target="_blank">NITI Aayog, Trade Watch Quarterly: April - June Q1 FY26</a></span>
+  </li>
+  <li>
+    <span class="src-num">2</span>
+    <span><a href="https://economictimes.com/news/economy/policy/budget-2026-measures-can-upgrade-indias-supply-chain-in-its-bid-to-match-up-with-china/articleshow/126243701.cms" target="_blank">The Economic Times, Budget 2026 measures can upgrade India's supply chain in its bid to match up with China</a></span>
+  </li>
+  <li>
+    <span class="src-num">4</span>
+    <span><a href="https://nsearchives.nseindia.com/corporate/TOTAL_07082025152340_Press_Release_Q1_FY26.pdf" target="_blank">NSE India, Press Release Q1 FY26</a></span>
+  </li>
+  <li>
+    <span class="src-num">5</span>
+    <span><a href="https://unlistedintel.com/macro-memo/macro-memo-september-2025/" target="_blank">Unlisted Intel, Macro Memo - September 2025</a></span>
+  </li>
+  <li>
+    <span class="src-num">6</span>
+    <span><a href="https://www.alphacapital.in/blog/India2025EconomicResilienceAmidGeopoliticalFriction" target="_blank">Alpha Capital, India 2025: Economic Resilience Amid Geopolitical Friction</a></span>
+  </li></ul>
+    </div>
+  </aside>
+</div>
+
+<footer class="report-footer">
+  <p>Intelligence Report &nbsp;|&nbsp; Automated Research Pipeline &nbsp;|&nbsp; Not for redistribution</p>
+  <span class="footer-rule">Food and Beverage · Q1 2026</span>
+</footer>
+
+</body>
+</html>
